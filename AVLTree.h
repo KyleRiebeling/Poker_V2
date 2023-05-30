@@ -201,13 +201,6 @@ private:
 
       return b;
    }
-   //Print Left Right
-   void preOrder(Node<T> *n) {
-      if (n == NULL) return;
-      cout << n->data << " ";
-      preOrder(n->left);
-      preOrder(n->right);
-   }
 
    //Left Print Right
    void inOrder(Node<T> *n) {
@@ -215,40 +208,6 @@ private:
       inOrder(n->left);
       cout << "Round: " <<n->data << " - " << n->winner << " won with " << hands[n->handVal-1] << " They won $" << n->winnings << "!" << endl;
       inOrder(n->right);
-   }
-   
-   //Print down each level left to right, h increased each time in order to travel deeper
-   void levelOrder(Node<T> *n, int h){
-      if (n == NULL)return;
-      if (h == 1){
-         cout << n->data << " ";
-      }
-      else if (h > 1){
-         levelOrder(n->left, h-1);
-         levelOrder(n->right, h-1);
-      }
-   }
-   
-   //Left Right Print
-   void postOrder(Node<T> *n){
-      if (n == NULL) {return;}
-      postOrder(n->left);
-      postOrder(n->right);
-      cout << n->data << " ";
-   }
-
-   void display(Node<T> *n, int level) {
-      int i;
-      if (n != NULL) {
-         display(n->right, level + 1);
-         cout << endl;
-         if (n == root)
-            cout << "R -> ";
-         for (i = 0; i < level && n != root; i++)
-            cout << "     ";
-         cout << n->data;
-         display(n->left, level + 1);
-      }
    }
    
    Node<T> *find(Node<T> *n, T t){
@@ -278,31 +237,9 @@ public:
       root = deleteNode(root, t);
    }
 
-   void preOrder() {
-      preOrder(root);
-      cout << endl;
-   }
-
    void inOrder() {
       inOrder(root);
       cout << endl;
-   }
-
-   void postOrder(){
-      postOrder(root);
-      cout << endl;
-   }
-
-   void levelOrder(){
-      int h = root->getHeight(root);
-      for (int i = 1; i <= h; i++) levelOrder(root,i);
-      cout << endl;
-   }
-
-   //Slightly modified function from class example
-
-   void display() {
-      display(root, 1);
    }
    
    void addHandVal(int val, int round){

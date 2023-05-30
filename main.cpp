@@ -27,33 +27,6 @@ int main() {
 
    cout << endl << "Welcome to the table!" << endl;
    pTable.printPlayers();
-
-
-   //-----GAME LOOP-----
-
-   //Place Buy-in Bets++++
-
-   //Deal cards ++++
-
-   //Ask for more bets 2 ++
-
-   //Dealer places three cards on table ++
-
-   //Ask for more bets/folds 3 ++
-
-   //Dealer places one more card ++
-
-   //Ask for bets/fold 4 ++
-
-   //Dealer places last card ++
-
-   //Last round of betting 5 +++
-
-   //Reveal winner and their hand
-
-   //Ask if you want to keep going
-   
-   
    
    while (tempC != 'q') {
       pTable.setTurn(1);

@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Trees_Graph_Poker
+PROJECTNAME=Poker_V2
 
 # Active Configuration
 DEFAULTCONF=Debug

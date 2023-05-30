@@ -213,7 +213,7 @@ private:
    void inOrder(Node<T> *n) {
       if (n == NULL) return;
       inOrder(n->left);
-      cout << "Round: " <<n->data << " - " << n->winner << " won with " << hands[n->handVal] << " They won $" << n->winnings << "!" << endl;
+      cout << "Round: " <<n->data << " - " << n->winner << " won with " << hands[n->handVal-1] << " They won $" << n->winnings << "!" << endl;
       inOrder(n->right);
    }
    

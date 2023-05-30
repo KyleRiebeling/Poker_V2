@@ -16,6 +16,7 @@
 #include <iterator>
 #include <algorithm>
 #include <utility>
+#include <iostream>
 
 #include "Card.h"
 
@@ -153,23 +154,28 @@ public:
       }
    }
 
-   void shuffleDeck(int pos) {
-      if (52 - pos < 2) {
+   void shuffleDeck(int size) {
+      if (size < 2) {
          // resets dealCard counter
          currentCard = 0;
          return;
       }
+      shuffleDeck(size - 1);
       srand(time(0));
-      int randCard = rand() % 51 - pos;
-      if (randCard < 0)randCard = 0;
-      swap(deck[pos],deck[randCard]);
+      int randCard = rand() % size;
       
-      shuffleDeck(pos + 1);
+      swap(deck[size-1], deck[randCard]);
+      
+      //Card temp = deck[size];
+      //deck[size] = deck[randCard];
+      //deck[randCard] = temp;
+      
+      
    }
 
    Card dealCard() {
       if (currentCard >= 52) {
-         shuffleDeck(0);
+         shuffleDeck(52);
       }
       currentCard++;
       return deck[currentCard - 1];

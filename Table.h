@@ -38,7 +38,7 @@ public:
    Table(int num_Players) {
       pot = 0;
       turn = 1;
-      myDeck.shuffleDeck(0);
+      myDeck.shuffleDeck(52);
 
       int tempN;
       string tempS;

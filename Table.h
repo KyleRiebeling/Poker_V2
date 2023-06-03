@@ -16,6 +16,7 @@
 
 #include "DeckOfCards.h"
 #include "AVLTree.h"
+#include "BiMatrixGraph.h"
 
 using namespace std;
 
@@ -33,12 +34,15 @@ private:
    int turn;
    int round = 0;
    AVLTree<int> roundHist;
+   BiMatrixGraph *handHist;
+
 public:
 
    Table(int num_Players) {
       pot = 0;
       turn = 1;
       myDeck.shuffleDeck(52);
+      handHist = new BiMatrixGraph(14);
 
       int tempN;
       string tempS;
@@ -79,7 +83,7 @@ public:
    void placeBets() {
       int currBet;
       char tempC;
-      
+
       if (turn == 1) {
          round++;
          //Add node to history AVL tree
@@ -152,7 +156,7 @@ public:
 
       if (activePlayers.size() == 1 && turn < 10) {
          cout << "Everyone else folded, ";
-         map<string,int>::iterator it = activePlayers.begin();
+         map<string, int>::iterator it = activePlayers.begin();
          players[it->first] = it->second;
          declareWinner(1);
          return;
@@ -289,6 +293,11 @@ public:
    }
 
    int findWinner(pair<int, int> p1, pair<int, int> p2, pair<int, int> p3) {
+      //Add each hands weight to hand history
+      handHist->incEdge(0, p1.first + 3);
+      handHist->incEdge(1, p2.first + 3);
+      handHist->incEdge(2, p3.first + 3);
+
       pair<int, int> largest = p1;
       if (p2.first > largest.first || (p2.first == largest.first && p2.second > largest.second)) {
          largest = p2;
@@ -296,10 +305,10 @@ public:
       if (p3.first > largest.first || (p3.first == largest.first && p3.second > largest.second)) {
          largest = p3;
       }
-      
-      //Add players hand value to history
-      roundHist.addHandVal(largest.first,round);
-      
+
+      //Add players hand value to round history
+      roundHist.addHandVal(largest.first, round);
+
       if (largest.first == p1.first && largest.second == p1.second) {
          return 1;
       }
@@ -332,10 +341,10 @@ public:
 
       turn = 100;
       itr->second += pot;
-      
+
       //Add winner name and winnings
-      roundHist.addNameMoney(winner,pot,round);
-      
+      roundHist.addNameMoney(winner, pot, round);
+
       pot = 0;
       printPlayers();
    }
@@ -343,7 +352,7 @@ public:
    void raise(string raiser) {
       char tempC = ' ';
       int timesAsked = 0;
-      
+
       for (auto itr = activePlayers.begin(); itr != activePlayers.end(); itr++) {
          timesAsked++;
          if (itr->first != raiser) {
@@ -375,9 +384,16 @@ public:
          }
       }
    }
-   
-   void displayHistory(){
+
+   void displayHistory() {
+      string names[4] = {" ", " ", " ", " "};
+      int i = 0;
+      for (auto it = players.begin(); it != players.end(); it++) {
+         names[i] = it->first;
+         i++;
+      }
       roundHist.inOrder();
+      handHist->print(names);
    }
 };
 

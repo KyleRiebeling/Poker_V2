@@ -5,6 +5,7 @@
                    displayName="Header Files"
                    projectFiles="true">
       <itemPath>AVLTree.h</itemPath>
+      <itemPath>BiMatrixGraph.h</itemPath>
       <itemPath>Card.h</itemPath>
       <itemPath>DeckOfCards.h</itemPath>
       <itemPath>Table.h</itemPath>
@@ -42,6 +43,8 @@
       </compileType>
       <item path="AVLTree.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="BiMatrixGraph.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Card.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="DeckOfCards.h" ex="false" tool="3" flavor2="0">
@@ -72,6 +75,8 @@
         </asmTool>
       </compileType>
       <item path="AVLTree.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="BiMatrixGraph.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="Card.h" ex="false" tool="3" flavor2="0">
       </item>

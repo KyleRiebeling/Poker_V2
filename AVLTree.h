@@ -210,22 +210,47 @@ private:
       inOrder(n->right);
    }
    
-   Node<T> *find(Node<T> *n, T t){
+   Node<T> *addHandVal(Node<T> *n, T t, int val){
       if (n == NULL) {
          return n;
       }
       //Less than current node
       if (t < n->data) {
-         n->left = find(n->left, t);
+         n->left = addHandVal(n->left, t, val);
       }//greater than current node
       else if (t > n->data) {
-         n->right = find(n->right, t);
+         n->right = addHandVal(n->right, t, val);
       }
       //Once value is found, modify children nodes, then delete the node
       else {
+         n->handVal = val;
+         int x = n->data;
+         n->right = addHandVal(n->right,x,val);
+      }
+      return n;
+   }
+   
+   Node<T> *addNameMoney(Node<T> *n, T t, string name, int win){
+      if (n == NULL) {
          return n;
       }
+      //Less than current node
+      if (t < n->data) {
+         n->left = addNameMoney(n->left, t, name, win);
+      }//greater than current node
+      else if (t > n->data) {
+         n->right = addNameMoney(n->right, t, name, win);
+      }
+      //Once value is found, modify children nodes, then delete the node
+      else {
+         n->winner = name;
+         n->winnings = win;
+         int x = n->data;
+         n->right = addNameMoney(n->right,x,name,win);
+      }
+      return n;
    }
+
 
 public:
 
@@ -243,14 +268,12 @@ public:
    }
    
    void addHandVal(int val, int round){
-      Node<T> *temp = find(root,round);
-      temp->handVal = val;
+      root = addHandVal(root,round,val);
    }
    
    void addNameMoney(string name, int win, int round){
-      Node<T> *temp = find(root,round);
-      temp->winner = name;
-      temp->winnings = win;
+      root = addNameMoney(root,round,name,win);
+      
    }
 };
 #endif /* AVLTREE_H */
